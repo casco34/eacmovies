@@ -11,7 +11,7 @@ $(document).ready(function(){
         let movie = $("#movie-input").val(); // here we are grabbing the text from the input box
         console.log(movie);
         //now we make our URL
-        let queryURL = "https://www.omdbapi.com/?s=" + movie+ "&y=&plot=short&apikey=8b3c560b";
+        let queryURL = "https://www.omdbapi.com/?s=" + movie+ "&y=&plot=short&apikey=trilogy";
     
     
         $.ajax({
@@ -21,16 +21,20 @@ $(document).ready(function(){
             
             console.log(response);
     
-            let results = response.data;
-            
-            let imgURL = response.Poster;
-            let movieDiv = $("<div class = 'cols-md-4'>");
+            let results = response.Search;
+
+            for (let i = 0; i <results.length; i++){ // making a for loop for all images to be displayed
+                
+            let movieDiv = $("<div class = 'col-md-3'>");
+            let imgURL = results[i].Poster;
             let showImage = $("<img>").attr("src", imgURL);
-            movieDiv.append(showImage);
-            $("#movie-view").prepend(movieDiv);
+
+
+            movieDiv.append(showImage); //putting together the movieDiv with showImage
+            $("#movie-view").prepend(movieDiv);// this will display the images.
     
     
-        
+        }
         });
     
     });
